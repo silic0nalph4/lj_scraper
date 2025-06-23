@@ -1,0 +1,333 @@
+body {
+    font-family: Cambria, Liberation Serif, Bitstream Vera Serif, Georgia, Times, Times New Roman, serif;
+    margin: 2em;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1em;
+    color: #2c5282;
+    margin-top: 2em;
+}
+
+h2 {
+    color: #444;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+h3 {
+    color: #666;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+.date {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1em;
+}
+
+.url-section {
+    margin: 2em 0;
+    padding: 1em;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.url-label {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.url-container {
+    text-align: center;
+    padding: 0.5em;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.post-url {
+    color: #2c5282;
+    text-decoration: none;
+    font-size: 0.9em;
+    word-break: break-all;
+}
+
+.post-url:hover {
+    text-decoration: underline;
+}
+
+.post-content {
+    margin-top: 2em;
+    border-top: 1px solid #eee;
+    padding-top: 2em;
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0;
+    padding: 1em;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    gap: 1em;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2c5282;
+    padding: 0.5em 1em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    text-align: center;
+}
+
+.nav-link.prev {
+    text-align: left;
+}
+
+.nav-link.next {
+    text-align: right;
+}
+
+.nav-link:hover {
+    background-color: #f0f0f0;
+    text-decoration: none;
+}
+
+.back-to-top {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.back-to-top a {
+    text-decoration: none;
+    color: #2c5282;
+    font-size: 0.9em;
+}
+
+.back-to-top a:hover {
+    text-decoration: underline;
+}
+
+.toc-section {
+    margin-bottom: 2em;
+}
+
+.toc-year {
+    margin-bottom: 1.5em;
+}
+
+.toc-posts {
+    list-style-type: none;
+    padding-left: 1em;
+}
+
+.toc-posts li {
+    margin: 0.4em 0;
+    font-size: 1em;
+}
+
+.toc-posts a {
+    text-decoration: none;
+    color: #2c5282;
+}
+
+.toc-posts a:hover {
+    text-decoration: underline;
+}
+
+.tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+.tag {
+    background-color: #e8f0ff;
+    color: #2c5282;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tag a {
+    text-decoration: none;
+    color: #2c5282;
+}
+
+.tag a:hover {
+    color: #1a365d;
+}
+
+.tag-count {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.back-link {
+    margin: 20px;
+    font-size: 0.9em;
+}
+
+.back-link a {
+    text-decoration: none;
+    color: #2c5282;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+.tag-posts {
+    list-style-type: none;
+    padding-left: 1em;
+    margin: 20px;
+}
+
+.tag-posts li {
+    margin: 0.5em 0;
+}
+
+.tag-posts a {
+    text-decoration: none;
+    color: #2c5282;
+}
+
+.tag-posts a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile improvements for TOC and Tags pages only */
+@media (max-width: 768px) {
+    /* TOC page improvements */
+    .toc-posts a {
+        font-size: 1.2em;
+        line-height: 1.5;
+        padding: 8px 0;
+        display: block;
+        min-height: 44px; /* Touch-friendly minimum height */
+    }
+    
+    .toc-posts li {
+        margin: 0.8em 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5em;
+    }
+    
+    /* Tags page improvements */
+    .tags-cloud {
+        gap: 8px;
+        margin: 15px;
+        padding: 10px;
+    }
+    
+    .tag {
+        padding: 12px 16px;
+        font-size: 1.1em;
+        min-height: 48px; /* Touch-friendly minimum height */
+        margin: 3px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .tag a {
+        font-size: 1.1em;
+        font-weight: 500;
+        display: block;
+        padding: 4px 0;
+    }
+    
+    .tag-count {
+        font-size: 0.9em;
+        font-weight: bold;
+        color: #555;
+    }
+    
+    /* Tag posts page improvements */
+    .tag-posts a {
+        font-size: 1.2em;
+        line-height: 1.5;
+        padding: 8px 0;
+        display: block;
+        min-height: 44px;
+    }
+    
+    .tag-posts li {
+        margin: 0.8em 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5em;
+    }
+    
+    /* Back link improvements */
+    .back-link {
+        margin: 15px;
+        font-size: 1.1em;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .back-link a {
+        font-weight: 500;
+        padding: 8px 16px;
+        display: inline-block;
+        background-color: #2c5282;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    
+    .back-link a:hover {
+        background-color: #1a365d;
+        text-decoration: none;
+    }
+}
+
+/* Additional improvements for very small screens */
+@media (max-width: 480px) {
+    .toc-posts a,
+    .tag-posts a {
+        font-size: 1.3em;
+        padding: 10px 0;
+    }
+    
+    .tag {
+        padding: 15px 20px;
+        font-size: 1.2em;
+        min-height: 52px;
+    }
+    
+    .tag a {
+        font-size: 1.2em;
+    }
+    
+    .back-link {
+        font-size: 1.2em;
+        margin: 10px;
+    }
+} 

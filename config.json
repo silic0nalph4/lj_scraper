@@ -1,0 +1,21 @@
+{
+    "_comment": "Configuration settings for the LiveJournal scraper",
+    "blog_url": "https://evo-lutio.livejournal.com/",
+    "date_range": {
+        "start_date": "2014-01-01",
+        "end_date": "2015-01-01",
+        "_comment": "Format: YYYY-MM-DD"
+    },
+    "included_tags": [],
+    "_comment": "Only scrape posts with these tags. Empty array means include all posts.",
+    "excluded_tags": ["evolutiolab"],
+    "_comment": "Exclude posts with these tags. Empty array means no exclusions.",
+    "output_dir": "posts",
+    "scraping_settings": {
+        "max_retries": 3,
+        "request_timeout": 10,
+        "request_delay": 1,
+        "max_pages": 10,
+        "_comment": "Delay between requests in seconds"
+    }
+} 
