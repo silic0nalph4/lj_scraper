@@ -43,13 +43,26 @@ Output: EPUB (eBook format)
 
 ## Installation
 1. Clone this repository or download the files
-2. Install the required packages:
+2. Create a Python virtual environment:
+```bash
+python -m venv ./venv
+```
+3. Activate the virtual environment:
+```bash
+source venv/bin/activate
+```
+4. Install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
 ## Usage
 ### Step 1: Scraping Posts
+
+Copy the example config file to create your own:
+```bash
+cp config.json.example config.json
+```
 
 Run the scraper to collect posts from the LiveJournal blog:
 
@@ -62,6 +75,7 @@ python lj_scraper.py
   ```json
   {
     "blog_url": "https://blog_name.livejournal.com/",
+    "login": true,
     "start_date": "2025-06-01",
     "end_date": "2025-06-30",
     "included_tags": [],

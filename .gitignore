@@ -29,6 +29,7 @@ epub/
 *.epub
 evo_lutio/
 *.html
+config.json
 
 # Logs
 *.log
