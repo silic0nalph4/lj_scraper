@@ -9,6 +9,8 @@ from dateutil import parser
 import calendar
 import json
 from typing import Dict, Any
+from login import login
+from getpass import getpass
 
 # Set up logging
 logging.basicConfig(
@@ -21,6 +23,7 @@ def validate_config(config: Dict[str, Any]) -> None:
     """Validate the configuration dictionary."""
     required_fields = {
         'blog_url': str,
+        'login': bool,
         'date_range': dict,
         'included_tags': list,
         'excluded_tags': list,
@@ -100,7 +103,9 @@ class LJScraper:
         self.config = config
         self.blog_url = config['blog_url']
         self.base_url = self.blog_url # Not clear why we have blog_url and base_url
-        self.output_dir = config['output_dir']
+        self.journal_name = self.blog_url.split(".")[0].replace("https://", '')
+        self.login = config['login']
+        self.output_dir = config['output_dir'] + os.path.sep + self.journal_name
         self.start_date = parser.parse(config['date_range']['start_date'])
         self.end_date = parser.parse(config['date_range']['end_date'])
         self.included_tags = config['included_tags']
@@ -111,6 +116,15 @@ class LJScraper:
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
             logger.info(f"Created output directory: {self.output_dir}")
+        
+        if self.login:
+            print("Authentication with LiveJournal requested")
+            username = input("Enter LiveJournal Username: ")
+            password = getpass("Enter LiveJournal password: ")
+            self.cookies = login(username, password)
+        else:
+            print("Authentication not requested - only public posts will be scraped")
+            self.cookies = {}
 
     def get_page_content(self, url):
         """Fetch the content of a page with error handling and retries."""
@@ -119,7 +133,7 @@ class LJScraper:
                 headers = {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
                 }
-                response = requests.get(url, headers=headers, timeout=self.scraping_settings['request_timeout'])
+                response = requests.get(url, headers=headers, cookies=self.cookies, timeout=self.scraping_settings['request_timeout'])
                 response.raise_for_status()
                 return response.text
             except requests.RequestException as e:
@@ -206,7 +220,8 @@ class LJScraper:
             soup.find('h1', class_='entry-title') or
             soup.find('h1', class_='b-singlepost-title') or
             soup.find('h1', class_='b-singlepost-title-link') or
-            soup.find('h1', class_='b-singlepost-title-text')
+            soup.find('h1', class_='b-singlepost-title-text') or
+            soup.find('div', class_='subject')
         )
         if not title_elem:
             logger.info(f"Skipping page without title: {post_url}")
@@ -221,7 +236,8 @@ class LJScraper:
             soup.find('time', class_='entry-date') or
             soup.find('time', class_='b-singlepost-date') or
             soup.find('span', class_='b-singlepost-date') or
-            soup.find('time', class_='b-singlepost-date-text')
+            soup.find('time', class_='b-singlepost-date-text') or
+            soup.find('div', class_='date')
         )
         if not date_elem:
             logger.info(f"Skipping page without date: {post_url}")
@@ -229,6 +245,10 @@ class LJScraper:
             
         # Extract date from the time element's text
         date_text = date_elem.text.strip()
+        
+        # With certain themes there can be an @ between the date and the time
+        date_text = date_text.replace('@', '')
+        
         # Parse the date using dateutil
         try:
             post_date = parser.parse(date_text)
@@ -305,7 +325,8 @@ class LJScraper:
                 soup.find('div', class_='b-singlepost-body') or
                 soup.find('div', class_='b-singlepost-bodytext') or
                 soup.find('div', class_='b-singlepost-body-text') or
-                soup.find('div', class_='b-singlepost-body-text-wrapper')
+                soup.find('div', class_='b-singlepost-body-text-wrapper') or
+                soup.find('div', class_='entry_text')
             )
         if not content_elem:
             logger.error("Could not find content element")
