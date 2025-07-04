@@ -1,5 +1,6 @@
 {
     "_comment": "Configuration settings for the LiveJournal scraper",
+    "blog_url": "https://evo-lutio.livejournal.com/",
     "login": true,
     "date_range": {
         "start_date": "2014-01-01",
