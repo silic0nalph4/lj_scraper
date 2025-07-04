@@ -52,9 +52,9 @@ python -m venv ./venv
 source venv/bin/activate
 ```
 4. Install the required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 ### Step 1: Scraping Posts
