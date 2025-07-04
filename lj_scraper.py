@@ -99,7 +99,7 @@ class LJScraper:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.blog_url = config['blog_url']
-        self.base_url = "https://evo-lutio.livejournal.com"
+        self.base_url = self.blog_url # Not clear why we have blog_url and base_url
         self.output_dir = config['output_dir']
         self.start_date = parser.parse(config['date_range']['start_date'])
         self.end_date = parser.parse(config['date_range']['end_date'])
