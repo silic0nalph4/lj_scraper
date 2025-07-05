@@ -441,6 +441,7 @@ class LJScraper:
         while current_year <= self.end_date.year:
             while current_month <= 12:
                 if current_year == self.end_date.year and current_month > self.end_date.month:
+                    logger.info(f"Stopping processing at {current_year}-{current_month}")
                     break
 
                 if current_year == self.start_date.year and current_month < self.start_date.month:
@@ -472,9 +473,6 @@ class LJScraper:
 
                 current_month += 1
                 time.sleep(self.scraping_settings['request_delay'])  # Be nice to the server
-
-            if posts_saved > 0 and posts_attempted > 0:
-                break  # Stop if we've processed any posts and hit the date range
 
             current_year += 1
             current_month = 1
